@@ -71,7 +71,7 @@ public class Teacher {
    public static void options(){
     
     System.out.println("****************************\n \tWelcome to ABC college");
-    System.out.println("1-Create a new database for new academic year all sections \n2-Create a new database for just a class\n3root -p-Store student Data into the existing database\n4-update Grades of whole class\5-Update grade of particular student\6-Update attandance of whole class\7-Update attadnance of particular student\n8-Fees of All students\n9-Overview of Particular Student\n10-EXIT");
+    System.out.println("1-Create a new database for new academic year all sections \n 2-Create a new database for just a class\n3root -p-Store student Data into the existing database\n4-update Grades of whole class\5-Update grade of particular student\6-Update attandance of whole class\7-Update attadnance of particular student\n8-Fees of All students\n9-Overview of Particular Student\n10-EXIT");
     System.out.print("Enter the choice: ");
     int option = sc.nextInt();
     sc.nextLine();
@@ -80,6 +80,9 @@ public class Teacher {
     }
     else if(option ==2){
         DataBase();
+    }
+    else if(option ==3){
+        StudentData.Existing();
     }
     else if(option==9){
     }
