@@ -7,25 +7,28 @@ public class Grades extends Teacher {
         Scanner sc = new Scanner(System.in);
         try{
             Connection con = dbConnection.jdbcConnection();
-            String sql = "Insert into grades(Id,Name,Telugu,Hindi,English,Maths,Science,Social,Total)";
-            PreparedStatement ps = con.prepareStatement(sql);
-            while(lim>=0){
+            String sql = "Insert into grades(Id,Name,Telugu,Hindi,English,Maths,Science,Social,Total) values(?,?,?,?,?,?,?,?,?)";
+System.out.println("SQL: " + sql); // ← add this!
+System.out.println("? count: " + sql.chars().filter(c -> c == '?').count()); // ← add this!
+PreparedStatement ps = con.prepareStatement(sql);
+            
+            while(lim>0){
                 System.out.print("Enter Id: ");
                 String id = sc.nextLine();
                 System.out.print("Enter Name: ");
                 String name = sc.nextLine();
                 System.out.print("Enter Telugu Marks: ");
-                float tel = sc.nextFloat();
+                float tel = sc.nextFloat(); sc.nextLine();
                 System.out.print("Enter Hindi Marks: ");
-                float hin = sc.nextFloat();
+                float hin = sc.nextFloat();sc.nextLine();
                 System.out.print("Enter English Marks: ");
-                float eng = sc.nextFloat();
+                float eng = sc.nextFloat();sc.nextLine();
                 System.out.print("Enter Maths Marks: ");
-                float mat = sc.nextFloat();
+                float mat = sc.nextFloat();sc.nextLine();
                 System.out.print("Enter Science Marks\n(note if bio and phy enter avg of bio and phy): ");
-                float sci = sc.nextFloat();
+                float sci = sc.nextFloat();sc.nextLine();
                 System.out.print("Enter Social Marks: ");
-                float soc = sc.nextFloat();
+                float soc = sc.nextFloat();sc.nextLine();
                 float total = (tel+hin+eng+mat+sci+soc);
                 ps.setString(1,id);
                 ps.setString(2,name);
@@ -36,8 +39,10 @@ public class Grades extends Teacher {
                 ps.setFloat(7, sci);
                 ps.setFloat(8, soc);
                 ps.setFloat(9, total);
+                ps.executeUpdate();
                 lim--;
             }
+            
             ps.close();
         }catch(Exception e){
             System.out.println("Went Wrong!!");
@@ -49,10 +54,12 @@ public class Grades extends Teacher {
 
         try{
             Connection con = dbConnection.jdbcConnection();
-            String sql = "Update grades set Telugu=? Telugu=? Telugu=? Telugu=? Telugu=? Telugu=? Telugu=? where id=? ";
+            String sql = "Update grades set Telugu=?,Hindi=?,English=?,Maths=?,Science=?,Social=?,Total=? where id=? ";
             PreparedStatement ps = con.prepareStatement(sql);
             System.out.println("enter the id of the student: ");
             String id= sc.nextLine();
+            System.out.print("Enter Name: ");
+            String name = sc.nextLine();
             System.out.print("Enter Telugu Marks: ");
                 float tel = sc.nextFloat();
                 System.out.print("Enter Hindi Marks: ");
@@ -66,14 +73,15 @@ public class Grades extends Teacher {
                 System.out.print("Enter Social Marks: ");
                 float soc = sc.nextFloat();
                 float total = (tel+hin+eng+mat+sci+soc);
-                ps.setString(1,id);
-                ps.setFloat(3, tel);
-                ps.setFloat(4, hin);
-                ps.setFloat(5, eng);
-                ps.setFloat(6, mat);
-                ps.setFloat(7, sci);
-                ps.setFloat(8, soc);
-                ps.setFloat(9, total);
+                ps.setFloat(1, tel);
+                ps.setFloat(2, hin);
+                ps.setFloat(3, eng);
+                ps.setFloat(4, mat);
+                ps.setFloat(5, sci);
+                ps.setFloat(6, soc);
+                ps.setFloat(7, total);
+                ps.setString(8, id);
+                ps.executeUpdate();
                 ps.close();
         }catch(Exception e){
             System.out.println("Went Wrong!!");
