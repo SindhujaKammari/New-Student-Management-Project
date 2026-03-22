@@ -70,8 +70,8 @@ public class Teacher {
     }
    public static void options(){
     
-    System.out.println("****************************\n \tWelcome to ABC college");
-    System.out.println("1-Create a new database for new academic year all sections \n 2-Create a new database for just a class\n3root -p-Store student Data into the existing database\n4-update Grades of whole class\5-Update grade of particular student\6-Update attandance of whole class\7-Update attadnance of particular student\n8-Fees of All students\n9-Overview of Particular Student\n10-EXIT");
+    System.out.println("****************************\nWelcome to ABC college");
+    System.out.println("(1)Create a new database for new academic year all sections \n(2)Create a new database for just a class\n(3)Store student Data into the existing database\n(4)update Grades of whole class\n(5)Update grade of particular student\n(6)Update attandance of whole class\n(7)Update attadnance of particular student\n(8)Fees of All students\n(9)Overview of Particular Student\n(10)EXIT");
     System.out.print("Enter the choice: ");
     int option = sc.nextInt();
     sc.nextLine();
@@ -88,6 +88,24 @@ public class Teacher {
         System.out.println("Enter total number of students: ");
         int lim = sc.nextInt();
         Grades.grade(lim);
+    }
+    else if(option ==5){
+        Grades.updateGradeOfParticularStudent();
+    }
+    else if(option == 6){
+        System.out.print("Enter the Strength of Class: ");
+        int lim = sc.nextInt();
+        Attendance.attendanceOfWholeClass(lim);
+    }
+    else if(option == 7){
+        System.out.print("Enter the Id of the Student: ");
+        String id = sc.next();
+        Attendance.attandanceOfParticularStudent(id);
+    }
+    else if( option == 8){
+        System.out.print("Enter the Id of the Student: ");
+        String id = sc.next();
+        Attendance.fees(id);
     }
     else if(option==9){
     }
