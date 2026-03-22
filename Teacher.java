@@ -22,11 +22,11 @@ public class Teacher {
     6-Overview
         a-name, roll , course, cgpa, attandance, fees paid or not
     */
-   private static Connection con;
+   
    static Scanner sc = new Scanner(System.in);
    public static void DataBase(){
         try{
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/StudentData","root","Sindhu@#$08");
+            Connection con = dbConnection.jdbcConnection();
             System.out.println("Working Fine!!");
             System.out.print("Enter Strength of the class: ");
             int strength = sc.nextInt();sc.nextLine();
@@ -83,6 +83,11 @@ public class Teacher {
     }
     else if(option ==3){
         StudentData.Existing();
+    }
+    else if(option ==4){
+        System.out.println("Enter total number of students: ");
+        int lim = sc.nextInt();
+        Grades.grade(lim);
     }
     else if(option==9){
     }
