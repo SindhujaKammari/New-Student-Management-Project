@@ -33,13 +33,39 @@ public class Attendance {
                 ps.executeUpdate();
                 lim--;
             }
+            ResultSet rs = ps.executeQuery();
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int colCount = rsmd.getColumnCount();
+            while(rs.next()){
+                for(int i=0;i<colCount;i++){
+                    System.out.println(rsmd.getColumnName(i));
+                }
+            }
         }catch(Exception e){
             System.out.println("Went Wrong!!");
             e.printStackTrace();
         }
     }
     public static void attandanceOfParticularStudent(String id){
-
+        try{
+            Connection con = dbConnection.jdbcConnection();
+            String sql = "Select * from students where Id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1,id);
+            ResultSet rs = ps.executeQuery();
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int colCount = rsmd.getColumnCount();
+            while(rs.next()){
+                for(int i=0;i<colCount;i++){
+                    String ColName = rsmd.getColumnName(i);
+                    String value = rs.getString(i);
+                    System.out.println(ColName+" : "+value);
+                }
+            }
+        }catch(Exception e){
+            System.out.println("Went Wrong!!");
+            e.printStackTrace();
+        }
     }
     public static void fees(String id){
 
