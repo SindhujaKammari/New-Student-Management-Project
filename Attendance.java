@@ -33,12 +33,14 @@ public class Attendance {
                 ps.executeUpdate();
                 lim--;
             }
-            ResultSet rs = ps.executeQuery();
+            ps.close();
+            PreparedStatement ps2 = con.prepareStatement("Select * from attandance");
+            ResultSet rs = ps2.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
             int colCount = rsmd.getColumnCount();
             while(rs.next()){
-                for(int i=0;i<colCount;i++){
-                    System.out.println(rsmd.getColumnName(i));
+                for(int i=1;i<=colCount;i++){
+                    System.out.println(rsmd.getColumnName(i)+" : "+rs.getString(i));
                 }
             }
         }catch(Exception e){
@@ -56,7 +58,7 @@ public class Attendance {
             ResultSetMetaData rsmd = rs.getMetaData();
             int colCount = rsmd.getColumnCount();
             while(rs.next()){
-                for(int i=0;i<colCount;i++){
+                for(int i=1;i<=colCount;i++){
                     String ColName = rsmd.getColumnName(i);
                     String value = rs.getString(i);
                     System.out.println(ColName+" : "+value);
